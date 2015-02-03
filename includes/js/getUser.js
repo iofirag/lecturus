@@ -40,25 +40,20 @@ function handleEmailResponse(resp) {
 		if (resp.emails[i].type === 'account')
 			primaryEmail = resp.emails[i].value;
 	}
-	document.getElementById('responseContainer').value = 'Primary email: ' + primaryEmail/*+ '\n\nFull Response:\n' + JSON.stringify(resp)*/;
 	return primaryEmail;
 }
 
 function get_lectures_by_usermail(mail) {
-	// for test
 	$.ajax({
 		type: "POST",
 		url : "http://lecturus.herokuapp.com/users/getUser",
-		data : {
-			id : userMail
-		},
 		dataType : 'jsonp',
+		jsonpCallback : 'lecturusCallback',
+		data : {
+			email : "email1"//userMail
+		},
 		success : function(res) {
-			// do stuff with json (in this case an array)
-			// alert("Success");
-			debugger;
-			console.log("response (post): ", JSON.parse(res)[0]);
-			console.log(res);
+			document.getElementById('responseContainer').value = JSON.stringify(res[0]);
 		},
 		error : function(res, error) {
 			console.log(res);
