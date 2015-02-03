@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://apis.google.com/js/client:platform.js" async defer></script>
+	</head>
+	<body>
+		<span id="signinButton">
+		  <span
+		    class="g-signin"
+		    data-callback="signinCallback"
+		    data-clientid="406335918079-vp7frusg9g1k8itca6tmraa65jl2isbc.apps.googleusercontent.com"
+		    data-cookiepolicy="single_host_origin"
+		    data-requestvisibleactions="http://schema.org/AddAction"
+		    data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
+		  </span>
+		</span>
+	</body>
+	<script>
+		function oauth2callback(s){
+			console.log(s);
+		}
+		function signinCallback(authResult) {
+		  if (authResult['status']['signed_in']) {
+		    // Update the app to reflect a signed in user
+		    // Hide the sign-in button now that the user is authorized, for example:
+		    document.getElementById('signinButton').setAttribute('style', 'display: none');
+		    console.log(authResult);
+		  } else {
+		    // Update the app to reflect a signed out user
+		    // Possible error values:
+		    //   "user_signed_out" - User is signed-out
+		    //   "access_denied" - User denied access to your app
+		    //   "immediate_failed" - Could not automatically log in the user
+		    console.log('Sign-in state: ' + authResult['error']);
+		  }
+		}
+	</script>
+</html>
